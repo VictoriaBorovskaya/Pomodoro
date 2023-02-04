@@ -1,0 +1,11 @@
+.btn-timer {
+    @apply text-white font-medium text-lg px-3 py-1 hover:bg-red-500 hover:rounded-md;
+}
+
+.btn-timer-active {
+    @apply bg-red-500 rounded-md text-white font-medium text-lg px-3 py-1;
+}
+
+.btn-state {
+    @apply bg-white rounded-md shadow-md px-10 py-3 my-10 text-red-400 font-bold text-xl;
+}
