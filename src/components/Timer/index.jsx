@@ -62,9 +62,10 @@ const Timer = () => {
                     <button className={!isPomodoroActive & !isActive ?  "btn-timer-active" : "btn-timer"} onClick={handleLongBreak}> Долгий перерыв</button>
                 </div>
                 <div>
-                    { isPomodoroActive & isActive && <Pomodoro PomodoroTime={PomodoroTime} setPomodoroTime={setPomodoroTime} isCounting={isCounting} setIsCounting={setIsCounting}></Pomodoro>}
-                    { !isPomodoroActive & isActive  && <ShortBreak shortBreakTime={shortBreakTime} setShortBreakTime={setShortBreakTime} isCounting={isCounting} setIsCounting={setIsCounting}></ShortBreak>}
-                    { !isPomodoroActive & !isActive && <LongBreak longBreakTime={longBreakTime} setLongBreakTime={setLongBreakTime} isCounting={isCounting} setIsCounting={setIsCounting}></LongBreak>}
+                    { isPomodoroActive & isActive 
+                    ? (<Pomodoro PomodoroTime={PomodoroTime} setPomodoroTime={setPomodoroTime} isCounting={isCounting} setIsCounting={setIsCounting}></Pomodoro>) 
+                    : (!isPomodoroActive & isActive  ? <ShortBreak shortBreakTime={shortBreakTime} setShortBreakTime={setShortBreakTime} isCounting={isCounting} setIsCounting={setIsCounting}></ShortBreak> 
+                    : (!isPomodoroActive & !isActive && <LongBreak longBreakTime={longBreakTime} setLongBreakTime={setLongBreakTime} isCounting={isCounting} setIsCounting={setIsCounting}></LongBreak>))}
                 </div>
                 <div className="flex justify-center gap-5">
                     {isCounting && (<button onClick={handlePause} className="btn-state">ПАУЗА</button>)}
@@ -72,8 +73,9 @@ const Timer = () => {
                     <button onClick={handleReset} className="btn-state">СБРОС</button>
                 </div>
             </div>
-            {isPomodoroActive & isActive ? (<p className="text-center font-medium text-xl text-white py-5">Время сосредоточиться!</p>) 
-            : <p className="text-center font-medium text-xl text-white py-5">Время отдохнуть!</p>}
+            { (isPomodoroActive & isActive & PomodoroTime > 0) || (shortBreakTime === 0) || (longBreakTime === 0) ? (<p className="text-center font-medium text-xl text-white py-5">Время сосредоточиться!</p>) 
+            : (((PomodoroTime === 0) || (!isPomodoroActive & !isActive) || (!isPomodoroActive & isActive)) && (<p className="text-center font-medium text-xl text-white py-5">Время отдохнуть!</p>))
+            }
         </div>
     )
 }
