@@ -16,7 +16,7 @@ const ShortBreak = (props) => {
     }, [shortBreakTime, isCounting, setShortBreakTime, setIsCounting])
 
     return(
-        <div className="text-9xl font-bold text-white py-10">
+        <div className="text-8xl sm:text-9xl font-bold text-white py-10">
             <span>{minutes}</span>
             <span>:</span>
             <span>{seconds}</span>

@@ -57,9 +57,9 @@ const Timer = () => {
     }
 
     return(
-        <div className="max-w-3xl m-auto px-16 py-20">
+        <div className="max-w-3xl m-auto px-5 py-10 sm:py-20 sm:px-16">
             <div className="bg-red-300 rounded-md flex flex-col items-center">
-                <div className="flex justify-between items-center w-full px-10 py-8">
+                <div className="flex justify-between items-center w-full px-3 sm:px-10 py-8 gap-2 sm:gap-0">
                     <button className={isPomodoroActive & isActive ? "btn-timer-active" : "btn-timer"} onClick={handlePomodoro}>Pomodoro</button>
                     <button className={!isPomodoroActive & isActive ?  "btn-timer-active" : "btn-timer"} onClick={handleShortBreak}>Короткий перерыв</button>
                     <button className={!isPomodoroActive & !isActive ?  "btn-timer-active" : "btn-timer"} onClick={handleLongBreak}> Долгий перерыв</button>
