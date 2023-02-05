@@ -6,11 +6,9 @@ import ShortBreak from "components/ShortBreak"
 import LongBreak from "components/LongBreak"
 import "./Styles.css"
 
-const Timer = () => {
+const Timer = (props) => {
     // переменные для таймеров
-    let startTime = 5
-    let shortTime = 5 
-    let longTime = 5
+    const {startTime, shortTime, longTime} = props
 
     // перерменные с useState
     const [PomodoroTime, setPomodoroTime] = useState(startTime) // state для Pomodoro
@@ -44,16 +42,19 @@ const Timer = () => {
     const handlePomodoro = () => {
         setIsPomodoroActive(true)
         setIsActive(true)
+        setIsCounting(false)
     }
 
     const handleShortBreak = () => {
         setIsPomodoroActive(false)
         setIsActive(true)
+        setIsCounting(false)
     }
 
     const handleLongBreak = () => {
         setIsPomodoroActive(false)
         setIsActive(false)
+        setIsCounting(false)
     }
 
     return(
@@ -76,7 +77,9 @@ const Timer = () => {
                     <button onClick={handleReset} className="btn-state">СБРОС</button>
                 </div>
             </div>
-            { ((PomodoroTime=== 0) || (shortBreakTime === 0) || (longBreakTime === 0)) && (<audio src={AlarmClock} onCanPlay={play}></audio>)}
+            { ((PomodoroTime=== 0) || (shortBreakTime === 0) || (longBreakTime === 0)) && (<audio onCanPlay={play}>
+                <source src={AlarmClock} type="audio/mp3"></source>
+            </audio>)}
             { (isPomodoroActive & isActive & PomodoroTime > 0) || (shortBreakTime === 0) || (longBreakTime === 0) ? (<p className="text-center font-medium text-2xl text-white py-5" >Время сосредоточиться!</p>) 
             : (((PomodoroTime === 0) || (!isPomodoroActive & !isActive) || (!isPomodoroActive & isActive)) && (<p className="text-center font-medium text-2xl text-white py-5" >Время отдохнуть!</p>))
             }

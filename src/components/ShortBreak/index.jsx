@@ -15,6 +15,9 @@ const ShortBreak = (props) => {
         return () => clearInterval(interval)
     }, [shortBreakTime, isCounting, setShortBreakTime, setIsCounting])
 
+    // для вывода времени в title
+    document.title = '(' + minutes + ':' + seconds + ') Pomodoro'
+
     return(
         <div className="text-8xl sm:text-9xl font-bold text-white py-10">
             <span>{minutes}</span>
