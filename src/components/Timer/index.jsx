@@ -1,4 +1,6 @@
 import { useState} from "react"
+import useSound from 'use-sound'
+import AlarmClock from "./AlarmClock.mp3"
 import Pomodoro from "components/Pomodoro"
 import ShortBreak from "components/ShortBreak"
 import LongBreak from "components/LongBreak"
@@ -6,9 +8,9 @@ import "./Styles.css"
 
 const Timer = () => {
     // переменные для таймеров
-    let startTime = 25 * 60
-    let shortTime = 5 * 60
-    let longTime = 15 * 60
+    let startTime = 5
+    let shortTime = 5 
+    let longTime = 5
 
     // перерменные с useState
     const [PomodoroTime, setPomodoroTime] = useState(startTime) // state для Pomodoro
@@ -17,6 +19,7 @@ const Timer = () => {
     const [isCounting, setIsCounting] = useState(false) // для изменения кнопок старт и пауза 
     const [isPomodoroActive, setIsPomodoroActive] = useState(true) // для переключения между вкладками Pomodoro и перерывами
     const [isActive, setIsActive] = useState(true) // для переключения между вкладками перерывов
+    const [play] = useSound(AlarmClock)
 
     // функции onClick для кнопок
     const handleStart = () => {
@@ -56,7 +59,7 @@ const Timer = () => {
     return(
         <div className="max-w-3xl m-auto px-16 py-20">
             <div className="bg-red-300 rounded-md flex flex-col items-center">
-                <div className="flex justify-between items-center w-full px-10 py-5">
+                <div className="flex justify-between items-center w-full px-10 py-8">
                     <button className={isPomodoroActive & isActive ? "btn-timer-active" : "btn-timer"} onClick={handlePomodoro}>Pomodoro</button>
                     <button className={!isPomodoroActive & isActive ?  "btn-timer-active" : "btn-timer"} onClick={handleShortBreak}>Короткий перерыв</button>
                     <button className={!isPomodoroActive & !isActive ?  "btn-timer-active" : "btn-timer"} onClick={handleLongBreak}> Долгий перерыв</button>
@@ -73,8 +76,9 @@ const Timer = () => {
                     <button onClick={handleReset} className="btn-state">СБРОС</button>
                 </div>
             </div>
-            { (isPomodoroActive & isActive & PomodoroTime > 0) || (shortBreakTime === 0) || (longBreakTime === 0) ? (<p className="text-center font-medium text-xl text-white py-5">Время сосредоточиться!</p>) 
-            : (((PomodoroTime === 0) || (!isPomodoroActive & !isActive) || (!isPomodoroActive & isActive)) && (<p className="text-center font-medium text-xl text-white py-5">Время отдохнуть!</p>))
+            { ((PomodoroTime=== 0) || (shortBreakTime === 0) || (longBreakTime === 0)) && (<audio src={AlarmClock} onCanPlay={play}></audio>)}
+            { (isPomodoroActive & isActive & PomodoroTime > 0) || (shortBreakTime === 0) || (longBreakTime === 0) ? (<p className="text-center font-medium text-2xl text-white py-5" >Время сосредоточиться!</p>) 
+            : (((PomodoroTime === 0) || (!isPomodoroActive & !isActive) || (!isPomodoroActive & isActive)) && (<p className="text-center font-medium text-2xl text-white py-5" >Время отдохнуть!</p>))
             }
         </div>
     )
