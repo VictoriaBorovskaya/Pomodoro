@@ -3,8 +3,6 @@ import Timer from 'components/Timer';
 import Information from 'components/Information';
 import './App.css';
 import { useState } from "react"
-import Settings from 'components/Settings';
-
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,7 +17,6 @@ function App() {
     <div>
       <Header isOpen={isOpen} setIsOpen={setIsOpen} isActive={isActive} setIsActive={setIsActive} />
       <Information isOpen={isOpen} setIsOpen={setIsOpen} />
-      <Settings isActive={isActive} setIsActive={setIsActive} startTime={startTime} shortTime={shortTime} longTime={longTime}/>
       <Timer startTime={startTime} shortTime={shortTime} longTime={longTime}/>
     </div>
   );
